@@ -5,7 +5,7 @@
   "Versions": [
     {
        "Version": "1.0.0",
-      "Url": "https://github.com/deusnefum/micro-quoter/",
+      "Url": "https://github.com/deusnefum/micro-quoter/archive/v1.0.0.zip",
       "Require": {
         "micro": ">=2.0.0"
       }
