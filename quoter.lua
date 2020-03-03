@@ -8,6 +8,7 @@ local quotePairs = {{"\"", "\""}, {"'","'"}, {"`","`"}, {"(",")"}, {"{","}"}, {"
 
 function init()
 	config.RegisterCommonOption("quoter", "enable", true)
+	config.AddRuntimeFile("quoter", config.RTHelp, "help/quoter.md")
 end
 
 function preRune(bp, r)
