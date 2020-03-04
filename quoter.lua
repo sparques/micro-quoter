@@ -29,4 +29,5 @@ end
 function quote(bp, open, close)
 	bp.Buf:Insert(-bp.Cursor.CurSelection[1], open)
 	bp.Buf:Insert(-bp.Cursor.CurSelection[2], close)
+	bp.Cursor.CurSelection[2].X = bp.Cursor.CurSelection[2].X -1
 end
