@@ -26,8 +26,14 @@ function preRune(bp, r)
 	end
 end
 
-function quote(bp, open, close)
-	bp.Buf:Insert(-bp.Cursor.CurSelection[1], open)
-	bp.Buf:Insert(-bp.Cursor.CurSelection[2], close)
-	bp.Cursor.CurSelection[2].X = bp.Cursor.CurSelection[2].X -1
+function quote(bp, open, close)	
+	if not (-bp.Cursor.CurSelection[1]):GreaterThan(-bp.Cursor.CurSelection[2]) then -- is the first selection point later in the document than the second?
+		bp.Buf:Insert(-bp.Cursor.CurSelection[1], open)  -- right order
+		bp.Buf:Insert(-bp.Cursor.CurSelection[2], close) -- this happens almost always
+		bp.Cursor.CurSelection[2].X = bp.Cursor.CurSelection[2].X - 1
+	else
+		bp.Buf:Insert(-bp.Cursor.CurSelection[2], open)  -- backwards to make sure the brackets aren't )like this(
+		bp.Buf:Insert(-bp.Cursor.CurSelection[1], close) -- this only happens if the user selects text backwards with a mouse
+		bp.Cursor.CurSelection[1].X = bp.Cursor.CurSelection[1].X - 1
+	end
 end
