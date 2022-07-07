@@ -1,4 +1,4 @@
-VERSION = "1.0.0"
+VERSION = "1.0.2"
 
 local config = import("micro/config")
 
@@ -15,7 +15,7 @@ function preRune(bp, r)
 	if bp.Buf.Settings["quoter.enable"] == false  then
 		return true
 	end
-	if bp.Cursor:HasSelection() == false then		
+	if bp.Cursor:HasSelection() == false then
 		return true
 	end
 	for i = 1, #quotePairs do
@@ -26,7 +26,7 @@ function preRune(bp, r)
 	end
 end
 
-function quote(bp, open, close)	
+function quote(bp, open, close)
 	if not (-bp.Cursor.CurSelection[1]):GreaterThan(-bp.Cursor.CurSelection[2]) then -- is the first selection point later in the document than the second?
 		bp.Buf:Insert(-bp.Cursor.CurSelection[1], open)  -- right order
 		bp.Buf:Insert(-bp.Cursor.CurSelection[2], close) -- this happens almost always
