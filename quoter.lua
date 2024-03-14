@@ -4,7 +4,7 @@ local config = import("micro/config")
 
 -- TODO: auto-indent when {} are used?
 
-local quotePairs = {{"\"", "\""}, {"'","'"}, {"`","`"}, {"(",")"}, {"{","}"}, {"[","]"}}
+local quotePairs = {{"\"", "\""}, {"'","'"}, {"`","`"}, {"(",")"}, {"{","}"}, {"[","]"}, {"<",">"}, {"`","`"}}
 
 function init()
 	config.RegisterCommonOption("quoter", "enable", true)
