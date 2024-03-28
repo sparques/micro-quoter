@@ -5,8 +5,14 @@
     "Tags": [
       "quote", "autosurround"
     ],
-    "Versions": [
-      
+    "Versions": [      
+      {
+        "Version": "1.0.3",
+        "Url": "https://github.com/deusnefum/micro-quoter/archive/v1.0.3.zip",
+        "Require": {
+          "micro": ">=2.0.0"
+        }
+      },
       {
         "Version": "1.0.2",
         "Url": "https://github.com/deusnefum/micro-quoter/archive/v1.0.2.zip",
