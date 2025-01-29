@@ -1,13 +1,16 @@
-VERSION = "1.0.2"
+VERSION = "1.1.0"
 
+local micro = import("micro")
 local config = import("micro/config")
 
 -- TODO: auto-indent when {} are used?
 
-local quotePairs = {{"\"", "\""}, {"'","'"}, {"`","`"}, {"(",")"}, {"{","}"}, {"[","]"}, {"<",">"}, {"`","`"}}
+function preinit()
+	config.RegisterCommonOption("quoter", "enable", true)
+	config.RegisterCommonOption("quoter", "mode", "default")
+end
 
 function init()
-	config.RegisterCommonOption("quoter", "enable", true)
 	config.AddRuntimeFile("quoter", config.RTHelp, "help/quoter.md")
 end
 
@@ -18,6 +21,18 @@ function preRune(bp, r)
 	if bp.Cursor:HasSelection() == false then
 		return true
 	end
+	
+	-- try using user settings, or use "default"
+	local mode = bp.Buf.Settings["quoter.mode"]
+	local quotePairs = modes[mode]
+
+	if not quotePairs then
+		micro.InfoBar():Error("Unknown quoter mode: \"" .. mode .. "\". Appliying mode \"default\".")
+		-- config.SetGlobalOption("quoter.mode", "default")
+		mode = "default"
+		quotePairs = modes["default"]
+	end
+	
 	for i = 1, #quotePairs do
 		if r == quotePairs[i][1] or r == quotePairs[i][2] then
 			quote(bp, quotePairs[i][1], quotePairs[i][2])
